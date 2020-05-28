@@ -10,5 +10,5 @@ Following are the features of the chatroom
 5. If the key is exchanged before the conversation it is erased after the conversation is finished.
 
 The project is done using Two python files:
-Server.py     --> Server is acting as one of the two clients
-Client2.py
+SERVER.py     --> Server is acting as one of the two clients
+CLIENT.py
