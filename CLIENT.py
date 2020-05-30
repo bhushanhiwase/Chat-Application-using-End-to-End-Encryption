@@ -8,6 +8,7 @@ PORT = 65435      # The port used by the server
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((HOST, PORT))
+print("connection to the host is successful..")
 
 flag = False
 # check and create RSA key pairs here.
