@@ -54,6 +54,9 @@ file.close()
 
 #Function for encryption
 def encrypt(msg):
+    '''
+    Function to Encrypt the message and to get the ciphertext
+    '''
     f = open("/home/ubuntu/.ssh/A_publickey.pem", "rb")
     key = RSA.importKey(f.read())
     x = key.encrypt(bytes(msg, "utf-8"), 32)
@@ -61,6 +64,9 @@ def encrypt(msg):
 
 #Function for decryption
 def decryptt(msg):
+    '''
+    Function to Decrypt the cyphertext to btain the orignal message
+    '''
     f1 = open("/home/ubuntu/.ssh/B_privatekey.pem", "rb")
     key1 = RSA.importKey(f1.read())
     z = key1.decrypt(msg) # try direct string
