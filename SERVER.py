@@ -57,21 +57,30 @@ file2.close()
 
 
 # function for encryption
-def encrypt(msg):              # Function to encrypt message before sending
+def encrypt(msg):              
+   '''
+    Function to encrypt message before sending
+   '''
    f = open("/home/ubuntu/.ssh/B_publickey.pem", "rb")
    key = RSA.importKey(f.read())
    x = key.encrypt(bytes(msg, "utf-8"), 32)
    return x[0]                        # returns the string
 
 
-def decryptt(msg):                  #Function for decryption
+def decryptt(msg):                  
+   '''
+   Function to decrypt the cyphertext into orignal Message
+   '''
    f1 = open("/home/ubuntu/.ssh/A_privatekey.pem", "rb")
    key1 = RSA.importKey(f1.read())
    z = key1.decrypt(msg)
    return z.decode("utf-8")
 
 
-def doagain():  # used to rerun the block when no msg is entered
+def doagain():  
+   '''
+   Function to handle the exception while user tries to send empty string
+   '''
    z = input("msg to B: ")
    if z:
        client.send(encrypt(z))
@@ -84,7 +93,10 @@ def doagain():  # used to rerun the block when no msg is entered
        doagain()
 
 
-def sendmsg():                  # Function for sending messages
+def sendmsg():     
+   '''
+   Function for sending messages to the other user
+   '''
    z = input("msg to B: ")
    if z:
        client.send(encrypt(z))
@@ -96,7 +108,10 @@ def sendmsg():                  # Function for sending messages
    else:                            # it is like gotto statement
         doagain()
 
-def recvmsg():                      # Function to receive messages
+def recvmsg():                      
+   '''
+   Function to receive messages
+   '''
    data = client.recv(2048)
    string = data
    if decryptt(string) == "exit" and flag == True:
