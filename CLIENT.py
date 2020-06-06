@@ -73,6 +73,9 @@ def decryptt(msg):
     return z.decode() 
 
 def doagain():
+    '''
+   Function to handle the exception while user tries to send empty string
+   '''
     data = input("msg to A: ")
     if data:
         s.send(bytes(data, 'utf-8'))
@@ -85,6 +88,9 @@ def doagain():
 
 #Function used to send messages
 def sendmsg():
+    '''
+   Function for sending messages to the other user
+   '''
     data = input("msg to A: ")
     if data:
         s.send(encrypt(data))
@@ -97,7 +103,6 @@ def sendmsg():
 
 #Function used to receive messages
 def recvmsg():
-
     recived = s.recv(2048)
     string = recived
     output = str(string)[1:]
