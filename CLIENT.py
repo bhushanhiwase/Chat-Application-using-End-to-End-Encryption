@@ -43,11 +43,11 @@ except OSError:                                                            # If 
 # sendong and reciving public keys
 
 data = s.recv(1024)
-file = open("/home/ubuntu/.ssh/A_publickey.pem", "wb")
+file = open("/home/ubuntu/.ssh/A_publickey.pem", "wb")            # Data can be sent and received in bytes format only over a channel
 file.write(data)
 file.close()
 
-file = open("/home/ubuntu/.ssh/B_publickey.pem", "rb")
+file = open("/home/ubuntu/.ssh/B_publickey.pem", "rb")             # Data can be sent and received in bytes format only over a channel
 data = file.read()
 s.send(data)
 file.close()
@@ -69,7 +69,7 @@ def decryptt(msg):
     '''
     f1 = open("/home/ubuntu/.ssh/B_privatekey.pem", "rb")
     key1 = RSA.importKey(f1.read())
-    z = key1.decrypt(msg) # try direct string
+    z = key1.decrypt(msg)       # try direct string
     return z.decode()           # Decode the bytes data into string format, can use str(z, "utf-8")
 
 def doagain():
@@ -93,9 +93,9 @@ def sendmsg():
    '''
     data = input("msg to A: ")
     if data:
-        s.send(encrypt(data))
+        s.send(encrypt(data))                                   # Encrypts (using encrypt function) and sends the data 
         if data == "exit":
-            if flag == True:
+            if flag == True:                                    # makes sure that shared keys are deleted
                 os.remove("/home/ubuntu/.ssh/A_publickey.pem")
             sys.exit()
     else:
@@ -111,14 +111,11 @@ def recvmsg():
     output = str(string)[1:]
 
     if decryptt(string) == "exit":
-        '''
-   Function for decrypting cypher text to get back orignal message
-   '''
         print("A left the chatroom...")
         sys.exit()
     elif len(string) > 0:
-        print("msg from A: ", "Orignal Message:",decryptt(string))
-        print("Cipher text:", output)
+        print("msg from A: ", "Orignal Message:",decryptt(string))   # Recives and Decrypts the message using decrypt function
+        print("Cipher text:", output)                                # prints cypher text i.e. message w/o decryption
     else:
         doagain()
 
