@@ -110,7 +110,7 @@ def sendmsg():
 
 def recvmsg():                      
    '''
-   Function to receive messages
+   Function to receive messages /data
    '''
    data = client.recv(2048)
    string = data
